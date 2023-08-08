@@ -542,7 +542,8 @@ elif 7z l -ba "${FILEPATH}" | grep -q -oP "(super.img|super.[0-9].+.img)" 2>/dev
 	fi
 	superimage_extract || exit 1
 elif 7z l -ba "${FILEPATH}" | grep tar.md5 | gawk '{print $NF}' | grep -q AP_ 2>/dev/null || [[ $(find "${TMPDIR}" -type f -name "*AP_*tar.md5" | wc -l) -ge 1 ]]; then
-	printf "AP tarmd5 Detected\n"
+	rm *.zip
+        printf "AP tarmd5 Detected\n"
 	#mv -f "${FILEPATH}" "${TMPDIR}"/
 	[[ -f "${FILEPATH}" ]] && 7z e -y "${FILEPATH}" 2>/dev/null >> "${TMPDIR}"/zip.log
 	printf "Extracting Images...\n"
